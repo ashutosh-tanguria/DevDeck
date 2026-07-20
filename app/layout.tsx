@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { cn } from "@/lib/utils";
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +22,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "DevDeck",
-  description: "Developer Dashboard",
+  description: "A modern developer dashboard built with Next.js 16.",
 };
 
 export default function RootLayout({
@@ -26,21 +33,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-white`}
       >
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
+        <ThemeProvider>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
 
-          <div className="flex flex-1">
-            <Sidebar />
+            <div className="flex flex-1">
+              <Sidebar />
 
-            <main className="flex-1 p-8 overflow-auto">
-              {children}
-            </main>
+              <main className="flex-1 p-8">{children}</main>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

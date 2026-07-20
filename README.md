@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 DevDeck
 
-## Getting Started
+A modern developer dashboard built with **Next.js 16**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**.
 
-First, run the development server:
+DevDeck is a learning project focused on mastering the Next.js App Router, reusable component architecture, responsive design, and API integration by building a clean, production-inspired dashboard.
+
+---
+
+## ✨ Features
+
+- 🌙 Light/Dark Theme Toggle
+- 📱 Fully Responsive Layout
+- 📂 Sidebar Navigation
+- 🍔 Mobile Drawer Navigation
+- 👤 GitHub Profile Viewer
+- ⚡ Loading & Error States
+- 🚫 Custom 404 Page
+- 🎨 Modern UI with shadcn/ui
+- 🧩 Reusable Components
+- 📦 Organized Project Structure
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js 16 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Lucide React
+
+### APIs
+- GitHub REST API
+
+---
+
+## 📂 Project Structure
+
+```text
+app/
+├── dashboard/
+├── github/
+├── settings/
+├── loading.tsx
+├── error.tsx
+├── not-found.tsx
+└── layout.tsx
+
+components/
+├── layout/
+│   ├── Navbar.tsx
+│   ├── Sidebar.tsx
+│   └── MobileSidebar.tsx
+│
+├── providers/
+│   └── ThemeProvider.tsx
+│
+└── ui/
+    ├── Card.tsx
+    ├── Spinner.tsx
+    ├── SearchBar.tsx
+    ├── ProfileCard.tsx
+    ├── ThemeToggle.tsx
+    └── button.tsx
+
+services/
+└── github.service.ts
+
+types/
+└── github.ts
+
+constants/
+```
+
+---
+
+## 📸 Screenshots
+
+> Add screenshots here after deployment.
+
+| Home | Dashboard | GitHub Viewer |
+|------|-----------|---------------|
+| Screenshot | Screenshot | Screenshot |
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/your-username/devdeck.git
+```
+
+Move into the project
+
+```bash
+cd devdeck
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📖 What I Learned
 
-To learn more about Next.js, take a look at the following resources:
+This project helped me understand:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js App Router
+- File-based Routing
+- Layouts
+- Client vs Server Components
+- React State Management
+- TypeScript Interfaces
+- API Fetching
+- Error Handling
+- Loading UI
+- Responsive Design
+- Theme Management
+- Component Reusability
+- Clean Folder Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔮 Future Improvements
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Authentication
+- Dashboard Widgets
+- Charts & Analytics
+- GitHub Repository Explorer
+- Recent Activity Feed
+- Search History
+- Profile Favorites
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 👨‍💻 Author
+
+**Ashutosh Tanguria**
