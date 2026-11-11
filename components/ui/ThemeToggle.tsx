@@ -2,33 +2,40 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
   if (!mounted) {
     return (
-      <button className="rounded-lg border border-zinc-700 p-2">
-        <div className="h w" />
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        className="inline-flex size-8 items-center justify-center rounded-lg border border-border text-muted-foreground"
+      >
+        <span className="size-4" />
       </button>
     );
   }
 
+  const isDark = resolvedTheme === "dark" || theme === "dark";
+
   return (
     <button
-      onClick={() =>
-        setTheme(theme === "dark" ? "light" : "dark")
-      }
-      className="rounded-lg border border-zinc-700 p-2 transition hover:bg-zinc-800"
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+      className="inline-flex size-8 items-center justify-center rounded-lg border border-border text-foreground transition hover:bg-muted"
     >
-      {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
     </button>
   );
 }

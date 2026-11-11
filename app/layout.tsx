@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/providers/ThemeProvider";
-
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-import { cn } from "@/lib/utils";
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +15,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "DevDeck",
-  description: "A modern developer dashboard built with Next.js 16.",
+export const metadata: Metadata = {
+  title: {
+    default: "DevDeck - Developer Dashboard",
+    template: "%s | DevDeck",
+  },
+  description: "A fast, modular developer dashboard with GitHub metrics, weather, pomodoro and projects tracking.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -35,16 +34,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground min-h-screen`}
       >
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-
             <div className="flex flex-1">
               <Sidebar />
-
-              <main className="flex-1 p-8">{children}</main>
+              <main className="flex-1 p-4 md:p-6 lg:p-8 max-w-7xl w-full mx-auto">{children}</main>
             </div>
           </div>
         </ThemeProvider>

@@ -1,19 +1,15 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
 
 export default function NotFound() {
   return (
-    <main className="flex min-h-full flex-col items-center justify-center text-center">
-      <h1 className="text-8xl font-black text-blue-500">404</h1>
-
-      <h2 className="mt-4 text-4xl font-bold">Lost in Space</h2>
-
-      <p className="mt-3 text-zinc-400">This page doesn't exist.</p>
-
-      <Link
-        href="/"
-        className="mt-8 rounded-xl bg-blue-600 px-6 py-3 transition hover:bg-blue-500"
-      >
-        Go Home
+    <main className="flex min-h-[60vh] flex-col items-center justify-center text-center">
+      <h1 className="text-6xl font-bold tracking-tight text-primary">404</h1>
+      <h2 className="mt-3 text-2xl font-semibold text-foreground">Page Not Found</h2>
+      <p className="mt-2 text-sm text-muted-foreground">The page you requested does not exist or has been moved.</p>
+      <Link href={ROUTES.DASHBOARD} className="mt-6">
+        <Button>Return to Dashboard</Button>
       </Link>
     </main>
   );
