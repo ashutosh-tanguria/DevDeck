@@ -3,7 +3,7 @@
 > A fast, modular developer dashboard built with Next.js 16, TypeScript, and Tailwind CSS v4.
 
 <!-- TODO: Update with your deployed Vercel production URL if different -->
-**Live Demo:** [https://devdeck-fe-only.vercel.app](https://devdeck-fe-only.vercel.app)
+**Live Demo:** [dev-deck-kappa.vercel.app](dev-deck-kappa.vercel.app)
 
 ---
 
