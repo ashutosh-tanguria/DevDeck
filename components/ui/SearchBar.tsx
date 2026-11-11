@@ -17,22 +17,30 @@ export default function SearchBar({
   loading,
 }: SearchBarProps) {
   return (
-    <div className="flex gap-3">
-      <input
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") onSearch();
-        }}
-        placeholder="Enter GitHub username..."
-        className="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 outline-none focus:border-blue-500"
-      />
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch();
+      }}
+      className="flex gap-2"
+    >
+      <label htmlFor="github-search-input" className="sr-only">
+        GitHub username
+      </label>
+      <div className="relative flex-1">
+        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+        <input
+          id="github-search-input"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub username (e.g. torvalds, vercel)..."
+          className="h-9 w-full rounded-lg border border-border bg-card pl-9 pr-3 text-sm text-foreground outline-none transition focus:border-foreground/30 focus:ring-1 focus:ring-ring"
+        />
+      </div>
 
-      <Button onClick={onSearch} disabled={loading}>
-        <Search className="mr-2 h-4 w-4" />
-
+      <Button type="submit" disabled={loading} className="h-9 px-4">
         {loading ? "Searching..." : "Search"}
       </Button>
-    </div>
+    </form>
   );
 }
