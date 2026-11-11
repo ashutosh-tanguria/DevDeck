@@ -157,18 +157,6 @@ Rather than importing heavy charting bundles (e.g., Chart.js, Recharts) that add
    ```
 
 ---
-
-## Deployment (Vercel)
-
-DevDeck is fully configured for zero-configuration deployment on [Vercel](https://vercel.com/):
-
-1. Import your Git repository into Vercel.
-2. Under **Environment Variables**, add:
-   - `GITHUB_TOKEN`: *(Optional)* Your GitHub Personal Access Token.
-3. Click **Deploy**.
-
----
-
 ## Author
 
 - **Ashutosh Tanguria**
