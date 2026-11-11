@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   description: "A fast, modular developer dashboard with GitHub metrics, weather, pomodoro and projects tracking.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
   },
 };
 
