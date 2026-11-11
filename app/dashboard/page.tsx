@@ -1,39 +1,88 @@
-import Card from "@/components/ui/Card";
-import { FolderGit2, Clock3, CloudSun, FolderKanban } from "lucide-react";
+"use client";
+
+import { useSyncExternalStore } from "react";
+import Link from "next/link";
+import { useSettings } from "@/lib/settings";
+import GithubWidget from "@/components/dashboard/GithubWidget";
+import WeatherWidget from "@/components/dashboard/WeatherWidget";
+import PomodoroWidget from "@/components/dashboard/PomodoroWidget";
+import ProjectsWidget from "@/components/dashboard/ProjectsWidget";
+import { Button } from "@/components/ui/button";
+import { Settings as SettingsIcon } from "lucide-react";
+import { ROUTES } from "@/constants/routes";
+
+function getTimeGreeting(): string {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning";
+  if (hour < 17) return "Good afternoon";
+  return "Good evening";
+}
+
+const emptySubscribe = () => () => {};
 
 export default function DashboardPage() {
-  return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-4xl font-bold">Welcome Back!</h1>
+  const { settings } = useSettings();
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
-        <p className="text-zinc-400 mt-2">Your developer dashboard.</p>
+  const greeting = mounted ? getTimeGreeting() : "Welcome";
+  const userGreeting = settings.defaultGithubUsername
+    ? `${greeting}, ${settings.defaultGithubUsername}`
+    : greeting;
+
+  const isConfigured = Boolean(
+    settings.defaultGithubUsername ||
+    settings.defaultWeatherCity !== "London"
+  );
+
+  return (
+    <div className="space-y-6">
+      {/* Time-of-day Header */}
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">{userGreeting}</h1>
+          <p className="text-xs text-muted-foreground">
+            Workspace overview with live telemetry and productivity widgets.
+          </p>
+        </div>
+
+        <Link href={ROUTES.SETTINGS}>
+          <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+            <SettingsIcon className="size-3.5" />
+            <span>Customize</span>
+          </Button>
+        </Link>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <Card title="GitHub">
-          <FolderGit2 className="mb-3 text-blue-400" size={30} />
+      {/* Unconfigured Helper Banner */}
+      {!isConfigured && (
+        <div className="rounded-xl border border-dashed border-border bg-muted/20 p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold text-foreground">Personalize your dashboard</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Set your default GitHub username and local weather city in Settings to unlock automated snapshots.
+              </p>
+            </div>
+            <Link href={ROUTES.SETTINGS}>
+              <Button size="sm" className="text-xs shrink-0">
+                Configure in Settings
+              </Button>
+            </Link>
+          </div>
+        </div>
+      )}
 
-          <p className="text-zinc-400">View GitHub profile statistics.</p>
-        </Card>
-
-        <Card title="Weather">
-          <CloudSun className="mb-3 text-yellow-400" size={30} />
-
-          <p className="text-zinc-400">Weather widget coming soon.</p>
-        </Card>
-
-        <Card title="Pomodoro">
-          <Clock3 className="mb-3 text-green-400" size={30} />
-
-          <p className="text-zinc-400">Stay productive.</p>
-        </Card>
-
-        <Card title="Projects">
-          <FolderKanban className="mb-3 text-purple-400" size={30} />
-
-          <p className="text-zinc-400">Track your projects.</p>
-        </Card>
+      {/* 4 Live Widgets Grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        <GithubWidget username={settings.defaultGithubUsername} />
+        <WeatherWidget
+          defaultCity={settings.defaultWeatherCity}
+          defaultLat={settings.defaultWeatherLat}
+          defaultLon={settings.defaultWeatherLon}
+          units={settings.weatherUnits}
+        />
+        <PomodoroWidget />
+        <ProjectsWidget />
       </div>
     </div>
   );
